@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鶯歌國小教職員數位協助站 Q&A</title>
+  
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 載入 Lucide 圖示庫 -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    /* 隱藏捲軸但保留滾動功能 */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* 手風琴動畫過渡效果 */
+    .faq-content {
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .faq-content.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+    
+    /* 圖示旋轉動畫 */
+    .faq-icon-wrapper {
+      transition: background-color 0.2s;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease-in-out;
+    }
+    .faq-icon.open {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#F8FAFC] font-sans selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Header 區域 -->
+  <header class="bg-gradient-to-r from-indigo-700 to-blue-600 text-white pb-20 pt-10 px-6 shadow-md">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+          <i data-lucide="laptop" class="w-8 h-8 text-white"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold tracking-wide">鶯歌國小</h1>
+          <p class="text-blue-100 text-sm tracking-widest mt-0.5">教職員數位協助站 Q&A</p>
+        </div>
+      </div>
+      
+      <div class="text-center max-w-2xl mx-auto mt-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 drop-shadow-sm">您需要什麼協助？</h2>
+        <p class="text-blue-100 mb-8 text-lg">快速查詢資訊設備操作、帳號密碼、校園網路與系統平台常見問題</p>
+        
+        <!-- 搜尋列 -->
+        <div class="relative group max-w-xl mx-auto">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <i data-lucide="search" class="h-6 w-6 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+          </div>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="搜尋問題，例如：「觸屏電視沒有聲音」、「忘記密碼」..."
+            class="w-full pl-12 pr-14 py-4 rounded-full border-0 focus:ring-4 focus:ring-indigo-300/50 text-slate-800 text-lg shadow-lg placeholder-slate-400 transition-all outline-none"
+          />
+          <button 
+            id="clearSearchBtn"
+            class="absolute inset-y-0 right-0 pr-5 flex items-center text-sm text-slate-400 hover:text-slate-600 hidden"
+          >
+            清除
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要內容區域 -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 -mt-10 pb-20">
+    <div class="flex flex-col lg:flex-row gap-8">
+      
+      <!-- 左側導覽分類 -->
+      <div class="lg:w-1/4 flex-shrink-0">
+        <div class="bg-white rounded-2xl shadow-sm p-4 sticky top-6 border border-slate-100">
+          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-3">常見問題分類</h3>
+          <nav id="categoryNav" class="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
+            <!-- 分類選單由 JS 動態生成 -->
+          </nav>
+        </div>
+      </div>
+
+      <!-- FAQ 列表區域 -->
+      <div class="lg:w-3/4">
+        <div id="faqContainer" class="space-y-10">
+          <!-- FAQ 內容由 JS 動態生成 -->
+        </div>
+
+        <!-- 輔助區塊 Banner -->
+        <div class="mt-12 bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-100 rounded-2xl p-8 text-center sm:text-left flex flex-col sm:flex-row items-center gap-6 justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-indigo-900 mb-1 flex items-center justify-center sm:justify-start gap-2">
+              <i data-lucide="lightbulb" class="w-5 h-5 text-yellow-500"></i>
+              上述 Q&A 沒有解決您的問題嗎？
+            </h3>
+            <p class="text-indigo-700/80">請多加利用「校務行政系統」的資訊設備報修模組，或直接聯繫我們。</p>
+          </div>
+          <button class="flex-shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-sm transition-colors hover:shadow-md active:scale-95">
+            聯絡資訊組
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-12 py-8">
+    <div class="max-w-5xl mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+      <div>
+        <p>© <span id="currentYear"></span> 新北市立鶯歌國民小學 資訊組維護</p>
+        <p class="mt-1">新北市鶯歌區尖山埔路106號</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/mis" target="_blank" rel="noreferrer" class="hover:text-indigo-600 transition-colors font-medium">
+          返回 mis 管理手誌首頁
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript 邏輯 -->
+  <script>
+    // --- 資料定義 ---
+    const faqData = [
+      {
+        id: 'sys', title: '各項服務系統', icon: 'globe',
+        items: [
+          { q: '如何登入新北市親師生平台與校務行政系統？', a: '請使用新北市「教育體系單一簽入服務」進行登入。您的帳號與密碼與校務行政系統相同，登入後即可使用各項雲端教學資源、成績系統與訊息公告功能。' },
+          { q: '學校官網如何新增活動相簿或影音？', a: '請先登入鶯小官網網站系統後台，點選「活動相簿新增操作」或「活動影音新增」模組，輸入活動名稱後即可批次上傳。建議照片在上傳前先進行基本壓縮以加快速度。' },
+          { q: '如何申請或報修班級網路電話？', a: '班級網路電話皆已綁定各班級專屬分機。若遇無法撥打、無聲音或實體設備故障，請直接透過「資訊設備報修」系統填單，資訊組將盡快協助處理。' },
+          { q: '如何存取「鶯小教職員共用雲端硬碟」？', a: '共用雲端硬碟僅限校內 Google 帳號 (@mail.ykes.ntpc.edu.tw) 存取。請確認您瀏覽器登入的是校內帳號，若使用私人 Gmail 將顯示「沒有存取權限」。' },
+          { q: '如何使用「鶯小Classroom網路教室」？', a: '請以學校配發的 Google 帳號登入 Google Classroom。建議老師利用教育局校務系統直接開課並同步學生名單，可省去手動邀請學生的時間。' }
+        ]
+      },
+      {
+        id: 'net', title: '網路與帳號服務', icon: 'wifi',
+        items: [
+          { q: '如何連線校園無線網路 (WiFi)？', a: '教職員請搜尋並連線至 SSID 為「NTPC-WPA2」的網路，連線時會彈出視窗或要求輸入憑證，請輸入您的「校務行政系統」帳號與密碼進行驗證即可上網。' },
+          { q: '忘記 Google 帳號密碼或無法登入怎麼辦？', a: '鶯歌國小教職員專屬 Google 帳號密碼是與「校務行政系統」連動的。若忘記密碼，請至校務行政系統重設密碼，系統會在 15~30 分鐘內自動同步至您的 Google 帳號。' },
+          { q: '在家裡如何連回校內網路 (新北市教育局 SSL VPN)？', a: '若需在家存取限校內 IP 使用的系統，請前往新北市網路服務入口下載 SSL VPN 軟體，安裝後使用校務行政系統帳號登入，即可取得校園內網連線權限。' }
+        ]
+      },
+      {
+        id: 'equip', title: '資訊設備使用與報修', icon: 'monitor',
+        items: [
+          { q: '觸屏電視或單槍投影機沒有畫面/沒有聲音？', a: '1. 請先檢查電源是否開啟，以及 10米USB延長線/影音控制器 是否連接妥當。2. 確認電腦與電視/投影機的訊號源是否匹配 (通常為 HDMI)。3. 若無聲音，請點擊電腦右下角喇叭圖示，將播放裝置切換至觸控螢幕。若仍有問題請填寫報修單。' },
+          { q: '班級電腦解析度異常或畫面比例不對？', a: '請在桌面點擊滑鼠右鍵，選擇「顯示設定」>「顯示器解析度」。建議觸屏電視調整為 1920x1080，傳統單槍投影機調整為 1024x768 或 1280x800，以確保畫面清晰且不被裁切。' },
+          { q: '如何借用公用設備 (如：Webcam、實物投影機、外接光碟機)？', a: '資訊組提供 Webcam視訊攝影機、無線滑鼠、學年共用USB外接光碟機等設備。請至資訊組辦公室填寫「設備借用登記表」，使用完畢請盡速歸還。' },
+          { q: '設備故障如何填寫「資訊設備報修」？', a: '請登入新北市校務行政系統，點選「設備維修管理模組」，詳細填寫損壞地點 (如：三年甲班) 與設備異常狀況。資訊組將依報修紀錄安排檢修。' }
+        ]
+      },
+      {
+        id: 'ipad', title: '生生用平板 (iPad) 專區', icon: 'tablet',
+        items: [
+          { q: '如何借用「生生用平板」進行教學？', a: '為配合教育部數位學習精進方案，請教師於上課前至校務行政系統預約借用。領取平板車時請清點設備數量，歸還時務必確認每台 iPad 皆已正確插上充電線，並將充電車上鎖。' },
+          { q: '平板裡沒有我需要的教學軟體/App 怎麼辦？', a: '生生用平板由教育局與學校 MDM (行動裝置管理) 系統統一管控，教師與學生無法自行下載 App。若需安裝特定「校園數位內容與教學軟體」，請提早向資訊組申請，由後台統一派送。' },
+          { q: '學生操作 iPad 時的注意事項有哪些？', a: '請提醒學生：1. 雙手保持乾燥拿取。2. 僅於課堂允許時間使用指定 App。3. 若平板因密碼輸入錯誤遭到鎖定，請記錄該設備背後的編號並通知資訊組解鎖，請勿讓學生自行嘗試解鎖以免永久停用。' }
+        ]
+      },
+      {
+        id: 'sec', title: '資通安全與個資保護', icon: 'shield-check',
+        items: [
+          { q: '每年需要完成多少小時的「資通安全線上研習」？', a: '依據資通安全法規定，一般教職員每年須完成至少 3 小時的資安通識教育訓練。請自行至 e等公務園+學習平臺 完成線上課程，並妥善保存研習證明。' },
+          { q: '什麼是 ODF-CNS15251 文件標準格式？', a: '為配合政府資訊公開與文件標準化，各項公文附件、學校網站公告檔案，請優先使用 ODF 開放格式 (如：.odt, .ods, .odp) 儲存與發布，避免使用 Word/Excel 等封閉性商業軟體格式。' },
+          { q: '處理學生資料 (資安防護與個人資料保護) 注意事項？', a: '處理含有學生個資之檔案（如成績單、輔導紀錄、身分證字號）時，請務必設定開啟密碼。切勿將含有未遮蔽個資之檔案直接上傳至公開之學校網頁或未限制權限的雲端空間。' }
+        ]
+      }
+    ];
+
+    // --- 狀態變數 ---
+    let activeCategory = 'all';
+    let searchTerm = '';
+
+    // --- DOM 元素參考 ---
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const categoryNav = document.getElementById('categoryNav');
+    const faqContainer = document.getElementById('faqContainer');
+    
+    // 設定目前年份
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // --- 輔助函式：高亮文字 ---
+    function highlightText(text, term) {
+      if (!term.trim()) return text;
+      // 避免 XSS 及確保正則安全
+      const safeTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${safeTerm})`, 'gi');
+      return text.replace(regex, `<span class="bg-yellow-200 text-slate-900 rounded-sm px-0.5">$1</span>`);
+    }
+
+    // --- 渲染分類導覽列 ---
+    function renderCategories() {
+      let navHtml = `
+        <button
+          onclick="setCategory('all')"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl whitespace-nowrap transition-colors ${
+            activeCategory === 'all' 
+              ? 'bg-indigo-50 text-indigo-700 font-semibold' 
+              : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+          }"
+        >
+          <i data-lucide="message-square" class="w-5 h-5 opacity-70"></i>
+          全部問題
+        </button>
+      `;
+
+      faqData.forEach(cat => {
+        navHtml += `
+          <button
+            onclick="setCategory('${cat.id}')"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl whitespace-nowrap transition-colors ${
+              activeCategory === cat.id 
+                ? 'bg-indigo-50 text-indigo-700 font-semibold' 
+                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+            }"
+          >
+            <i data-lucide="${cat.icon}" class="w-5 h-5 opacity-70"></i>
+            ${cat.title}
+          </button>
+        `;
+      });
+
+      categoryNav.innerHTML = navHtml;
+      // 重新繪製新加入 DOM 的圖示
+      lucide.createIcons();
+    }
+
+    // --- 渲染 FAQ 列表 ---
+    function renderFAQs() {
+      let filteredData = [...faqData];
+
+      // 依分類過濾
+      if (activeCategory !== 'all') {
+        filteredData = filteredData.filter(c => c.id === activeCategory);
+      }
+
+      // 依關鍵字過濾
+      if (searchTerm.trim() !== '') {
+        const term = searchTerm.toLowerCase();
+        filteredData = filteredData.map(category => {
+          const matchingItems = category.items.filter(
+            item => item.q.toLowerCase().includes(term) || item.a.toLowerCase().includes(term)
+          );
+          return { ...category, items: matchingItems };
+        }).filter(category => category.items.length > 0);
+      }
+
+      // 繪製結果
+      if (filteredData.length === 0) {
+        faqContainer.innerHTML = `
+          <div class="bg-white rounded-2xl p-12 text-center shadow-sm border border-slate-100">
+            <div class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="help-circle" class="w-10 h-10 text-slate-300"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-slate-700 mb-2">找不到符合的結果</h3>
+            <p class="text-slate-500 mb-6">沒有找到與「<span class="font-semibold text-slate-700">${searchTerm}</span>」相關的問答。</p>
+            <button 
+              onclick="clearSearch()"
+              class="px-6 py-2 bg-indigo-50 text-indigo-600 font-medium rounded-lg hover:bg-indigo-100 transition-colors"
+            >
+              清除搜尋條件
+            </button>
+          </div>
+        `;
+      } else {
+        let html = '';
+        filteredData.forEach((category, catIndex) => {
+          html += `
+            <div class="animate-fade-in">
+              <div class="flex items-center gap-3 mb-4 px-2">
+                <div class="bg-indigo-100 text-indigo-600 p-2 rounded-lg">
+                  <i data-lucide="${category.icon}" class="w-5 h-5"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800">${category.title}</h2>
+              </div>
+              <div>
+          `;
+
+          category.items.forEach((item, itemIndex) => {
+            const uniqueId = `faq-${catIndex}-${itemIndex}`;
+            html += `
+              <div class="border border-slate-200 rounded-xl mb-4 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+                <button
+                  onclick="toggleFaq('${uniqueId}')"
+                  class="w-full flex justify-between items-center p-5 text-left focus:outline-none group"
+                >
+                  <span class="flex-1 pr-6 text-lg font-medium text-slate-800 group-hover:text-indigo-600 transition-colors">
+                    <span class="inline-block mr-2 text-indigo-400">Q.</span>
+                    ${highlightText(item.q, searchTerm)}
+                  </span>
+                  <div id="icon-wrapper-${uniqueId}" class="faq-icon-wrapper p-1 rounded-full bg-slate-50 transition-colors group-hover:bg-slate-100">
+                    <i id="icon-${uniqueId}" data-lucide="chevron-down" class="faq-icon text-slate-400 w-5 h-5 flex-shrink-0 group-hover:text-indigo-500"></i>
+                  </div>
+                </button>
+                
+                <div id="content-${uniqueId}" class="faq-content">
+                  <div class="p-5 pt-0 text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                    <span class="font-semibold text-slate-700 mr-2">A.</span>
+                    ${highlightText(item.a, searchTerm)}
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          html += `</div></div>`;
+        });
+        faqContainer.innerHTML = html;
+      }
+      
+      // 更新 Lucide 圖示
+      lucide.createIcons();
+    }
+
+    // --- 事件處理函式 ---
+
+    // 設定目前分類
+    window.setCategory = function(catId) {
+      activeCategory = catId;
+      renderCategories();
+      renderFAQs();
+    };
+
+    // 清除搜尋
+    window.clearSearch = function() {
+      searchTerm = '';
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      renderFAQs();
+    };
+
+    // 手風琴展開/收合
+    window.toggleFaq = function(id) {
+      const content = document.getElementById(`content-${id}`);
+      const icon = document.getElementById(`icon-${id}`);
+      const iconWrapper = document.getElementById(`icon-wrapper-${id}`);
+      
+      const isOpen = content.classList.contains('open');
+      
+      if (isOpen) {
+        content.classList.remove('open');
+        icon.classList.remove('open');
+        icon.classList.replace('text-indigo-600', 'text-slate-400');
+        iconWrapper.classList.replace('bg-indigo-50', 'bg-slate-50');
+      } else {
+        content.classList.add('open');
+        icon.classList.add('open');
+        icon.classList.replace('text-slate-400', 'text-indigo-600');
+        iconWrapper.classList.replace('bg-slate-50', 'bg-indigo-50');
+      }
+    };
+
+    // 監聽搜尋輸入
+    searchInput.addEventListener('input', (e) => {
+      searchTerm = e.target.value;
+      
+      if (searchTerm.trim() !== '') {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
+      
+      renderFAQs();
+    });
+
+    // --- 初始化應用程式 ---
+    function init() {
+      renderCategories();
+      renderFAQs();
+    }
+
+    // 啟動
+    init();
+
+  </script>
+</body>
+</html>
