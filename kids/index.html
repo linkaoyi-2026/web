@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鶯歌國小附設幼兒園 - 115學年度招生資訊網</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#fef3c7', // amber-50
+                            DEFAULT: '#f59e0b', // amber-500
+                            dark: '#b45309', // amber-700
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自定義滾動條 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fef3c7; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fcd34d; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b; 
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        /* 隱藏/顯示導覽列陰影 */
+        .scrolled {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-brand-light antialiased tracking-wide overflow-x-hidden">
+
+    <!-- 頂部導覽列 -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass-panel border-b border-amber-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-school text-3xl text-brand mr-3"></i>
+                    <span class="font-black text-xl md:text-2xl text-brand-dark tracking-wider">鶯歌國小附幼</span>
+                </div>
+                <!-- 電腦版選單 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-brand font-bold transition">首頁</a>
+                    <a href="#age" class="text-gray-600 hover:text-brand font-bold transition">招生年齡</a>
+                    <a href="#timeline" class="text-gray-600 hover:text-brand font-bold transition">重要時程</a>
+                    <a href="#priority" class="text-gray-600 hover:text-brand font-bold transition">優先順位</a>
+                    <a href="#apply" class="bg-brand hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold shadow-md transition transform hover:-translate-y-0.5">我要報名</a>
+                </div>
+                <!-- 手機版選單按鈕 -->
+                <div class="flex md:hidden items-center">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand focus:outline-none">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 手機版下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-amber-200 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center shadow-lg">
+                <a href="#age" class="block px-3 py-3 text-gray-800 font-bold hover:bg-amber-50 rounded-lg">招生年齡</a>
+                <a href="#timeline" class="block px-3 py-3 text-gray-800 font-bold hover:bg-amber-50 rounded-lg">重要時程</a>
+                <a href="#priority" class="block px-3 py-3 text-gray-800 font-bold hover:bg-amber-50 rounded-lg">優先順位</a>
+                <a href="#apply" class="block mt-4 bg-brand text-white px-3 py-3 rounded-lg font-bold">前往報名網站</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. 首頁/主視覺 (Hero Section) -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100 overflow-hidden pt-20">
+        <!-- 裝飾背景圖形 -->
+        <div class="absolute top-20 left-10 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob"></div>
+        <div class="absolute top-40 right-20 w-48 h-48 bg-orange-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/2 w-56 h-56 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-4000"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <span class="inline-block py-1 px-4 rounded-full bg-orange-100 text-orange-600 font-bold tracking-widest text-sm mb-6 border border-orange-200 shadow-sm">
+                NEW TAIPEI CITY 115 ACADEMIC YEAR
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black text-gray-800 mb-6 leading-tight drop-shadow-sm">
+                <span class="text-brand">新北市115學年度</span><br/>公立幼兒園招生
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 font-medium">
+                歡迎加入鶯歌國小附設幼兒園的大家庭！<br class="hidden md:block" />我們為三鶯地區的孩子提供最優質的公立教保服務。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#timeline" class="w-full sm:w-auto bg-brand hover:bg-orange-600 text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center">
+                    <i class="fa-regular fa-calendar-check mr-2"></i> 查看重要時程
+                </a>
+                <a href="#priority" class="w-full sm:w-auto bg-white hover:bg-gray-50 text-brand-dark border-2 border-brand text-lg font-bold py-4 px-10 rounded-full shadow-md transition flex items-center justify-center">
+                    <i class="fa-solid fa-list-ol mr-2"></i> 確認優先資格
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 招生年齡 (Age Section) -->
+    <section id="age" class="min-h-screen py-24 bg-white flex flex-col justify-center relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mb-4">👶 招生年齡區間</h2>
+                <p class="text-xl text-gray-500">請對照寶貝的出生年月日，確認符合的學齡。</p>
+            </div>
+            
+            <!-- 橫式卡片排列 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 5歲 -->
+                <div class="bg-gradient-to-b from-blue-50 to-white p-8 rounded-3xl border border-blue-100 shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 text-center group">
+                    <div class="w-20 h-20 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 group-hover:scale-110 transition">
+                        5
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">5足歲</h3>
+                    <div class="h-1 w-12 bg-blue-500 mx-auto mb-4 rounded"></div>
+                    <p class="text-gray-600 font-medium text-lg mb-1">民國 109 年</p>
+                    <p class="text-gray-500">9/2 至 110.9.1 出生</p>
+                </div>
+
+                <!-- 4歲 -->
+                <div class="bg-gradient-to-b from-green-50 to-white p-8 rounded-3xl border border-green-100 shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 text-center group">
+                    <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 group-hover:scale-110 transition">
+                        4
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">4足歲</h3>
+                    <div class="h-1 w-12 bg-green-500 mx-auto mb-4 rounded"></div>
+                    <p class="text-gray-600 font-medium text-lg mb-1">民國 110 年</p>
+                    <p class="text-gray-500">9/2 至 111.9.1 出生</p>
+                </div>
+
+                <!-- 3歲 -->
+                <div class="bg-gradient-to-b from-purple-50 to-white p-8 rounded-3xl border border-purple-100 shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 text-center group">
+                    <div class="w-20 h-20 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 group-hover:scale-110 transition">
+                        3
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">3足歲</h3>
+                    <div class="h-1 w-12 bg-purple-500 mx-auto mb-4 rounded"></div>
+                    <p class="text-gray-600 font-medium text-lg mb-1">民國 111 年</p>
+                    <p class="text-gray-500">9/2 至 112.9.1 出生</p>
+                </div>
+
+                <!-- 2歲 -->
+                <div class="bg-gradient-to-b from-orange-50 to-white p-8 rounded-3xl border border-orange-100 shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 text-center group relative overflow-hidden">
+                    <div class="absolute top-4 right-4 text-orange-400 opacity-50">
+                        <i class="fa-solid fa-circle-exclamation text-xl"></i>
+                    </div>
+                    <div class="w-20 h-20 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 group-hover:scale-110 transition">
+                        2
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">2足歲</h3>
+                    <div class="h-1 w-12 bg-orange-500 mx-auto mb-4 rounded"></div>
+                    <p class="text-gray-600 font-medium text-lg mb-1">民國 112 年</p>
+                    <p class="text-gray-500 mb-3">9/2 至 113.9.1 出生</p>
+                    <span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded font-bold">需經教育局核定始得招收</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 重要時程 (Timeline Section) -->
+    <section id="timeline" class="min-h-screen py-24 bg-slate-50 flex flex-col justify-center border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mb-4">📅 招生重要時程</h2>
+                <p class="text-xl text-gray-500">全面採「網路報名」，請家長務必留意各階段截止時間。</p>
+            </div>
+
+            <!-- 橫向時程表 (桌面版) / 垂直 (手機版) -->
+            <div class="relative">
+                <!-- 桌面版連接線 -->
+                <div class="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-amber-200 -translate-y-1/2 z-0"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
+                    
+                    <!-- 時程 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-slate-300 text-center relative hover:-translate-y-2 transition duration-300">
+                        <div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center text-xl mx-auto mb-4 lg:-mt-12 shadow-sm border-4 border-white">
+                            1
+                        </div>
+                        <h4 class="text-brand-dark font-black text-xl mb-1">缺額公告</h4>
+                        <p class="text-2xl font-bold text-gray-800 mb-2">4/29 <span class="text-lg text-gray-500">(三)</span></p>
+                        <p class="text-gray-500 text-sm">上午 9:00</p>
+                        <p class="text-gray-600 mt-3 text-sm bg-slate-50 p-2 rounded">公告於招生網站</p>
+                    </div>
+
+                    <!-- 時程 2 (重點) -->
+                    <div class="bg-amber-50 p-6 rounded-2xl shadow-lg border-t-4 border-brand transform scale-105 text-center relative z-20">
+                        <div class="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-bounce">
+                            重點！
+                        </div>
+                        <div class="w-14 h-14 bg-brand text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4 lg:-mt-14 shadow-md border-4 border-white">
+                            2
+                        </div>
+                        <h4 class="text-brand-dark font-black text-xl mb-1">網路報名登記</h4>
+                        <p class="text-2xl font-bold text-gray-800 mb-1">4/30 - 5/7</p>
+                        <p class="text-red-500 font-bold text-sm mb-3">5/7 (四) 16:00 截止</p>
+                        <p class="text-gray-800 font-bold mt-2 text-sm bg-white border border-amber-200 p-2 rounded">逾期不再受理登記<br/>或更換志願序</p>
+                    </div>
+
+                    <!-- 時程 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-blue-300 text-center relative hover:-translate-y-2 transition duration-300">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-xl mx-auto mb-4 lg:-mt-12 shadow-sm border-4 border-white">
+                            3
+                        </div>
+                        <h4 class="text-blue-800 font-black text-xl mb-1">資格審查</h4>
+                        <p class="text-2xl font-bold text-gray-800 mb-2">5/8 - 5/12</p>
+                        <p class="text-gray-500 text-sm">由系統查調或人工審件</p>
+                        <p class="text-gray-600 mt-3 text-sm bg-blue-50 p-2 rounded">補件至 5/14 16:00</p>
+                    </div>
+
+                    <!-- 時程 4 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-purple-300 text-center relative hover:-translate-y-2 transition duration-300">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-xl mx-auto mb-4 lg:-mt-12 shadow-sm border-4 border-white">
+                            4
+                        </div>
+                        <h4 class="text-purple-800 font-black text-xl mb-1">電腦抽籤</h4>
+                        <p class="text-2xl font-bold text-gray-800 mb-2">5/19 <span class="text-lg text-gray-500">(二)</span></p>
+                        <p class="text-gray-500 text-sm">中午 12:00 抽籤</p>
+                        <p class="text-gray-600 mt-3 text-sm bg-purple-50 p-2 rounded">下午 15:00 公告錄取</p>
+                    </div>
+
+                    <!-- 時程 5 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-green-300 text-center relative hover:-translate-y-2 transition duration-300">
+                        <div class="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-xl mx-auto mb-4 lg:-mt-12 shadow-sm border-4 border-white">
+                            5
+                        </div>
+                        <h4 class="text-green-800 font-black text-xl mb-1">正取生報到</h4>
+                        <p class="text-2xl font-bold text-gray-800 mb-2">5/19 - 5/20</p>
+                        <p class="text-gray-500 text-sm">採全面「線上報到」</p>
+                        <p class="text-red-500 font-bold mt-3 text-sm bg-red-50 p-2 rounded">5/20 18:00 逾期視同放棄</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 優先順位 (Priority Section) -->
+    <section id="priority" class="min-h-screen py-24 bg-white flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-gray-800 mb-4">🏆 招生優先順位</h2>
+                <p class="text-xl text-gray-500">鶯歌國小附幼屬於<strong class="text-brand-dark">「三鶯分區」</strong>，設籍於此區享有優先分發優勢！</p>
+            </div>
+
+            <div class="bg-amber-50 rounded-3xl p-6 md:p-10 border border-amber-200 shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- 左側：第一至第七順位 -->
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-start">
+                            <span class="bg-red-100 text-red-600 font-bold px-3 py-1 rounded-lg mr-4 flex-shrink-0 text-sm mt-1">第 1 順位</span>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">法定需要協助之幼兒</h4>
+                                <p class="text-gray-500 text-sm mt-1">身心障礙、原住民、低收入戶、中低收入戶、特殊境遇家庭、父母/監護人中度以上身心障礙。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-start opacity-70">
+                            <span class="bg-gray-100 text-gray-600 font-bold px-3 py-1 rounded-lg mr-4 flex-shrink-0 text-sm mt-1">第 2-3 順位</span>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">偏遠 / 交通不便地區</h4>
+                                <p class="text-gray-500 text-sm mt-1">需設籍滿2年以上。(視教育局公告之特定區域而定)</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-start">
+                            <span class="bg-orange-100 text-orange-600 font-bold px-3 py-1 rounded-lg mr-4 flex-shrink-0 text-sm mt-1">第 4-5 順位</span>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">轉介安置 / 教職員工子女</h4>
+                                <p class="text-gray-500 text-sm mt-1">經市府轉介輔導安置，或本校(含附幼)115學年度編制內在職教職員工之適齡子女/孫子女。</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-start">
+                            <span class="bg-pink-100 text-pink-600 font-bold px-3 py-1 rounded-lg mr-4 flex-shrink-0 text-sm mt-1">第 6 順位</span>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">育有三胎以上子女家庭</h4>
+                                <p class="text-gray-500 text-sm mt-1">同父母育有三名以上子女(須提供戶口名簿證明)。</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-start">
+                            <span class="bg-purple-100 text-purple-600 font-bold px-3 py-1 rounded-lg mr-4 flex-shrink-0 text-sm mt-1">第 7 順位</span>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">家有兄姊弟妹就讀本園</h4>
+                                <p class="text-gray-500 text-sm mt-1">限兄姊於「115學年度」仍就讀本園(不含大班畢業生)。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右側：在地優勢 (第八、九順位) -->
+                    <div class="flex flex-col h-full">
+                        <div class="bg-gradient-to-br from-green-400 to-green-600 p-8 rounded-3xl shadow-lg text-white flex-grow relative overflow-hidden">
+                            <i class="fa-solid fa-map-location-dot absolute -bottom-10 -right-10 text-9xl text-white opacity-20"></i>
+                            <div class="relative z-10">
+                                <span class="bg-white text-green-600 font-black px-4 py-1 rounded-full inline-block mb-4 text-sm shadow">第 8 順位：在地優先</span>
+                                <h3 class="text-3xl font-black mb-4 tracking-wide">設籍「三鶯分區」<br/>或「本校學區」</h3>
+                                <p class="text-green-50 text-lg mb-6 leading-relaxed">
+                                    只要您的寶貝設籍、寄居或居留於：<br/>
+                                    <strong>📍 三鶯分區：鶯歌區、三峽區、樹林區</strong><br/>
+                                    <strong>📍 鶯歌國小學區內</strong><br/>
+                                    或是 <strong>現役軍人之子女</strong>，即具備第8順位抽籤資格！
+                                </p>
+                                <div class="bg-green-700 bg-opacity-30 p-4 rounded-xl border border-green-400 backdrop-blur-sm">
+                                    <p class="text-sm">💡 錄取規則：先依順位分發，同順位時依年齡(5>4>3>2歲)抽籤，最後再依登記志願序分發。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 mt-4 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-lg">第 9 順位</h4>
+                                <p class="text-gray-500 text-sm mt-1">設籍新北市之一般幼兒</p>
+                            </div>
+                            <span class="bg-gray-100 text-gray-500 font-bold px-4 py-2 rounded-lg text-sm">一般名額</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 報名與聯絡 (Footer CTA) -->
+    <section id="apply" class="py-20 bg-brand-dark text-center relative overflow-hidden">
+        <!-- 裝飾圓圈 -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute -top-24 -left-24 w-64 h-64 border-4 border-white opacity-10 rounded-full"></div>
+            <div class="absolute bottom-10 right-10 w-48 h-48 border-4 border-white opacity-10 rounded-full"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4">
+            <i class="fa-solid fa-laptop-house text-6xl text-brand-light mb-6 drop-shadow-md"></i>
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-wide">準備好報名了嗎？</h2>
+            <p class="text-xl text-amber-100 mb-10 leading-relaxed font-medium">
+                新北市公立幼兒園招生採「全面網路報名」。<br/>
+                請家長準備好戶口名簿等相關證明文件，於指定期限內前往系統登記。
+            </p>
+            <div class="bg-white p-2 rounded-full inline-block shadow-2xl mb-12">
+                <a href="https://kid123.ntpc.edu.tw" target="_blank" rel="noopener noreferrer" class="block bg-brand hover:bg-orange-500 text-white text-xl font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105">
+                    前往新北市幼兒園招生網站 <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left border-t border-amber-600 pt-10 mt-10">
+                <div class="text-amber-100">
+                    <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-phone mr-2"></i>聯絡我們</h4>
+                    <p class="text-sm mb-1">鶯歌國小附設幼兒園</p>
+                    <p class="text-sm mb-1">電話：(02) 2679-2038</p>
+                </div>
+                <div class="text-amber-100">
+                    <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-location-dot mr-2"></i>園址資訊</h4>
+                    <p class="text-sm">新北市鶯歌區尖山埔路106號</p>
+                    <p class="text-sm mt-1">歡迎加入三鶯在地優質學園</p>
+                </div>
+                <div class="text-amber-100">
+                    <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-circle-info mr-2"></i>注意事項</h4>
+                    <p class="text-sm">詳細招生規定、年齡區間與優先資格，皆以《新北市115學年度公立及非營利幼兒園招生簡章》公告為準。</p>
+                </div>
+            </div>
+
+            <!-- 新增：版權宣告與訪站人數計數器 -->
+            <div class="mt-12 pt-6 border-t border-amber-800/50 flex flex-col md:flex-row justify-between items-center text-amber-200/60 text-xs">
+                <p>© 115學年度 新北市鶯歌國小附設幼兒園. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i>
+                    <span>訪站人數：</span>
+                    <!-- 嵌入 Visitor Badge 服務，路徑設定為 yingge.preschool.115 -->
+                    <img src="https://api.visitorbadge.io/api/visitors?path=yingge.preschool.115&labelColor=%23b45309&countColor=%23f59e0b&label=%E7%B4%AF%E8%A8%88%E4%BA%BA%E6%AC%A1" alt="訪客人數" class="h-5 opacity-90 hover:opacity-100 transition-opacity rounded">
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 簡單的腳本用於 Navbar 滾動效果與手機選單 -->
+    <script>
+        // 導覽列滾動陰影
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('scrolled');
+                nav.classList.replace('bg-transparent', 'glass-panel');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 手機版選單切換
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // 點擊手機選單項目後自動收合
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
